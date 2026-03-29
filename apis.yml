@@ -1,0 +1,37 @@
+aid: sunset-header
+name: Sunset Header
+description: >-
+  The Sunset HTTP header field (RFC 8594) communicates the deprecation timeline
+  of API endpoints to consumers.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Deprecation
+  - Sunset
+  - HTTP Headers
+  - RFC 8594
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/sunset-header/refs/heads/main/apis.yml
+created: '2026-03-29'
+modified: '2026-03-29'
+specificationVersion: '0.19'
+apis:
+  - aid: sunset-header:sunset-header
+    name: Sunset Header
+    description: >-
+      The Sunset HTTP header field (RFC 8594) communicates the deprecation
+      timeline of API endpoints to consumers.
+    humanURL: https://datatracker.ietf.org/doc/html/rfc8594
+    tags:
+      - Deprecation
+      - Sunset
+      - HTTP Headers
+    properties:
+      - type: Documentation
+        url: https://datatracker.ietf.org/doc/html/rfc8594
+common:
+  - type: Website
+    url: https://datatracker.ietf.org/doc/html/rfc8594
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
