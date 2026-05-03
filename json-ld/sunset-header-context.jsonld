@@ -1,0 +1,69 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "ietf": "https://www.rfc-editor.org/rfc/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "http": "http://www.iana.org/assignments/http-fields/",
+
+    "SunsetHeader": {
+      "@id": "ietf:rfc8594#section-3",
+      "@type": "@id"
+    },
+    "DeprecationHeader": {
+      "@id": "ietf:rfc9745#section-2",
+      "@type": "@id"
+    },
+    "sunsetDate": {
+      "@id": "ietf:rfc8594#section-3",
+      "@type": "xsd:dateTime"
+    },
+    "deprecationDate": {
+      "@id": "ietf:rfc9745#section-2",
+      "@type": "xsd:dateTime"
+    },
+    "sunsetLinkRelation": {
+      "@id": "ietf:rfc8594#section-5",
+      "@type": "@id"
+    },
+    "deprecationLinkRelation": {
+      "@id": "ietf:rfc9745#section-3",
+      "@type": "@id"
+    },
+    "APIEndpoint": {
+      "@id": "schema:EntryPoint"
+    },
+    "APIVersion": {
+      "@id": "schema:version"
+    },
+    "deprecatedBy": {
+      "@id": "schema:supersededBy",
+      "@type": "@id"
+    },
+    "replacedBy": {
+      "@id": "schema:successorOf",
+      "@type": "@id"
+    },
+    "endOfLifeDate": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    },
+    "migrationGuide": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "httpStatusCode": {
+      "@id": "schema:identifier"
+    },
+    "linkRelation": {
+      "@id": "http:link-relation",
+      "@type": "@id"
+    },
+    "rfc": {
+      "@id": "owl:seeAlso",
+      "@type": "@id"
+    }
+  }
+}

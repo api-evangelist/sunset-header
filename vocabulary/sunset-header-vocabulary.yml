@@ -1,0 +1,110 @@
+vocabulary:
+  name: Sunset Header Vocabulary
+  description: >-
+    Normative vocabulary for the Sunset HTTP header field (RFC 8594) and the
+    Deprecation HTTP header field (RFC 9745). Covers terms, concepts, header
+    syntax, link relations, and API lifecycle semantics.
+  version: '1.0'
+  created: '2026-05-02'
+  modified: '2026-05-02'
+  tags:
+    - API Deprecation
+    - HTTP Headers
+    - RFC 8594
+    - RFC 9745
+    - API Lifecycle
+
+terms:
+  - term: Sunset
+    definition: >-
+      An HTTP response header field (RFC 8594) whose value is an HTTP-date
+      timestamp indicating when a URI is likely to become unresponsive. Treated
+      as a hint — not a guarantee — by clients.
+    syntax: 'Sunset: <HTTP-date>'
+    example: 'Sunset: Sat, 31 Dec 2026 23:59:59 GMT'
+    rfc: RFC 8594
+    section: '3'
+
+  - term: Deprecation
+    definition: >-
+      An HTTP response header field (RFC 9745) whose value is a structured date
+      (Unix timestamp) indicating when a resource was or will be deprecated.
+      Signals the start of the two-phase deprecation lifecycle; Sunset signals
+      the end.
+    syntax: 'Deprecation: @<unix-timestamp>'
+    example: 'Deprecation: @1688169599'
+    rfc: RFC 9745
+    section: '2'
+
+  - term: HTTP-date
+    definition: >-
+      The date format defined in RFC 7231 Section 7.1.1.1, used as the value
+      of the Sunset header. Example: Sat, 31 Dec 2026 23:59:59 GMT.
+    rfc: RFC 7231
+    section: '7.1.1.1'
+
+  - term: Sunset Link Relation
+    definition: >-
+      A link relation type registered in the IANA Link Relations registry
+      (RFC 8594). Used in Link response headers to reference documentation
+      describing an upcoming sunset, deprecation policies, and migration paths.
+    syntax: 'Link: <url>; rel="sunset"'
+    example: 'Link: <https://api.example.com/deprecated>; rel="sunset"'
+    rfc: RFC 8594
+    section: '5'
+
+  - term: Deprecation Link Relation
+    definition: >-
+      A link relation type registered in the IANA Link Relations registry
+      (RFC 9745). Used in Link response headers to reference documentation
+      about the deprecation policy or migration guidance.
+    syntax: 'Link: <url>; rel="deprecation"'
+    example: 'Link: <https://developer.example.com/deprecation>; rel="deprecation"'
+    rfc: RFC 9745
+    section: '3'
+
+  - term: Resource Lifecycle
+    definition: >-
+      The operational lifespan of an API endpoint or URI. Phases include:
+      active (normal operation), deprecated (operational but scheduled for
+      removal), and sunset (end-of-life, unresponsive). The Deprecation header
+      marks the transition from active to deprecated; the Sunset header marks
+      the end-of-life date.
+
+  - term: End-of-Life
+    definition: >-
+      The date and time after which an API endpoint stops responding. After
+      this point, clients may receive HTTP 410 Gone responses or connection
+      errors. Communicated via the Sunset header.
+
+  - term: API Versioning
+    definition: >-
+      The practice of maintaining multiple versions of an API simultaneously,
+      typically to support backward compatibility during migration periods.
+      The Sunset and Deprecation headers facilitate orderly version retirement.
+
+  - term: Migration
+    definition: >-
+      The process of transitioning API consumers from a deprecated endpoint
+      to a current or replacement endpoint. Sunset and deprecation headers
+      provide advance notice to trigger migration planning.
+
+  - term: Link Header
+    definition: >-
+      The HTTP Link response header (RFC 8288) used to express relationships
+      between resources. Used alongside Sunset and Deprecation headers to
+      provide links to deprecation documentation and replacement resources.
+    syntax: 'Link: <url>; rel="<relation>"'
+    rfc: RFC 8288
+
+  - term: HTTP 410 Gone
+    definition: >-
+      An HTTP status code indicating that the target resource is no longer
+      available and no forwarding address is known. Commonly returned by
+      servers after a Sunset date has passed.
+
+  - term: API Governance
+    definition: >-
+      Organizational practices for managing the quality, consistency, and
+      lifecycle of APIs. Includes deprecation policies, versioning strategies,
+      and communication standards for breaking changes.

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sunset-header/main/json-schema/sunset-header-schema.json",
+  "title": "Sunset Header",
+  "description": "Schema for representing API deprecation lifecycle data using the Sunset HTTP header field (RFC 8594) and Deprecation HTTP header field (RFC 9745).",
+  "type": "object",
+  "properties": {
+    "endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URI of the API endpoint subject to deprecation."
+    },
+    "sunsetDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the endpoint will become unresponsive. Corresponds to the value of the Sunset HTTP header (RFC 8594) in ISO 8601 format."
+    },
+    "deprecationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the endpoint was or will be deprecated. Corresponds to the Deprecation HTTP header (RFC 9745). Must not be later than sunsetDate if both are present."
+    },
+    "sunsetHeaderValue": {
+      "type": "string",
+      "description": "The raw HTTP-date value of the Sunset header as sent in the response (e.g., 'Sat, 31 Dec 2026 23:59:59 GMT').",
+      "example": "Sat, 31 Dec 2026 23:59:59 GMT"
+    },
+    "deprecationHeaderValue": {
+      "type": "string",
+      "description": "The raw structured-date value of the Deprecation header as sent in the response (e.g., '@1688169599').",
+      "example": "@1688169599"
+    },
+    "migrationUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the migration guide or replacement resource. Communicated via the Link header with rel='sunset' or rel='deprecation'."
+    },
+    "replacementEndpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URI of the replacement endpoint that consumers should migrate to."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "deprecated", "sunset"],
+      "description": "Current lifecycle status of the endpoint. 'active' is fully operational; 'deprecated' is operational but scheduled for retirement; 'sunset' is end-of-life."
+    },
+    "linkHeaders": {
+      "type": "array",
+      "description": "Array of Link header values associated with this endpoint's deprecation.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Target URL of the link."
+          },
+          "rel": {
+            "type": "string",
+            "enum": ["sunset", "deprecation", "successor-version", "latest-version"],
+            "description": "Link relation type."
+          }
+        },
+        "required": ["url", "rel"]
+      }
+    }
+  },
+  "required": ["endpoint", "status"],
+  "examples": [
+    {
+      "endpoint": "https://api.example.com/v1/users",
+      "status": "deprecated",
+      "deprecationDate": "2026-01-01T00:00:00Z",
+      "deprecationHeaderValue": "@1735689600",
+      "sunsetDate": "2027-01-01T00:00:00Z",
+      "sunsetHeaderValue": "Fri, 01 Jan 2027 00:00:00 GMT",
+      "migrationUrl": "https://developer.example.com/migration-v2",
+      "replacementEndpoint": "https://api.example.com/v2/users",
+      "linkHeaders": [
+        {
+          "url": "https://developer.example.com/migration-v2",
+          "rel": "deprecation"
+        },
+        {
+          "url": "https://api.example.com/v2/users",
+          "rel": "successor-version"
+        }
+      ]
+    }
+  ]
+}

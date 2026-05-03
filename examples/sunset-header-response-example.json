@@ -1,0 +1,41 @@
+{
+  "description": "Example HTTP response headers demonstrating the Sunset (RFC 8594) and Deprecation (RFC 9745) headers in use for an API endpoint being retired.",
+  "scenario": "API v1 endpoint deprecated in favor of v2, with a one-year sunset window",
+  "httpResponse": {
+    "statusCode": 200,
+    "headers": {
+      "Deprecation": "@1735689600",
+      "Sunset": "Thu, 01 Jan 2027 00:00:00 GMT",
+      "Link": [
+        "<https://developer.example.com/migration/v1-to-v2>; rel=\"deprecation\"; type=\"text/html\"",
+        "<https://api.example.com/v2/users>; rel=\"successor-version\"",
+        "<https://developer.example.com/v1-sunset-policy>; rel=\"sunset\""
+      ],
+      "Content-Type": "application/json"
+    }
+  },
+  "deprecationLifecycle": {
+    "endpoint": "https://api.example.com/v1/users",
+    "status": "deprecated",
+    "deprecationDate": "2026-01-01T00:00:00Z",
+    "deprecationHeaderValue": "@1735689600",
+    "sunsetDate": "2027-01-01T00:00:00Z",
+    "sunsetHeaderValue": "Thu, 01 Jan 2027 00:00:00 GMT",
+    "migrationUrl": "https://developer.example.com/migration/v1-to-v2",
+    "replacementEndpoint": "https://api.example.com/v2/users"
+  },
+  "notes": [
+    "The Deprecation header uses a Unix timestamp (structured date per RFC 9651)",
+    "The Sunset header uses HTTP-date format per RFC 7231",
+    "The Sunset date must not be earlier than the Deprecation date (RFC 9745)",
+    "The Link header with rel=deprecation points to migration documentation",
+    "The Link header with rel=sunset points to the sunset policy",
+    "After the Sunset date, clients may receive HTTP 410 Gone responses"
+  ],
+  "references": {
+    "rfc8594": "https://www.rfc-editor.org/rfc/rfc8594",
+    "rfc9745": "https://www.rfc-editor.org/rfc/rfc9745",
+    "rfc7231": "https://www.rfc-editor.org/rfc/rfc7231",
+    "rfc8288": "https://www.rfc-editor.org/rfc/rfc8288"
+  }
+}
