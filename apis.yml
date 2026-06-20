@@ -14,7 +14,7 @@ description: >-
   the end-of-life. These two headers are widely adopted in REST API governance
   practices and API lifecycle management tooling.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - API Deprecation
   - HTTP Headers
